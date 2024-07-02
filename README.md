@@ -2,7 +2,9 @@
 AutoDojo came about as a result of the [django_books_api](https://github.com/owenjklan/django-books-api)
 project which I started for myself as an educational/practice exercise.
 I very quickly became uninterested in repeating code for boilerplate
-CRUD operations on simple objects and as such, AutoDojo was born.
+CRUD operations on simple objects and as such, AutoDojo was born. This has
+also become a very educational exercise in Python type annotations and
+metaprogramming in general.
 
 ## Installation and use
 Pending a better packaging effort, AutoDojo can be used in a Django
