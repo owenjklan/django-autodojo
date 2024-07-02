@@ -6,8 +6,8 @@ from typing import Any, Callable, Type
 from django.http import HttpRequest
 from django.test import TestCase
 
-from autodojo.tests.models import ChildModel, ForeignKeyParentModel
-from autodojo.tests.schemas import DummySchema
+from .models import ChildModel
+from .schemas import DummySchema
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "django_books_api.settings"
 
