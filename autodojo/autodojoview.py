@@ -63,6 +63,7 @@ class AutoDojoView:
         response_schema: Type[Schema] = None,
         request_schema_config: dict[str, Any] = None,
         response_schema_config: dict[str, Any] = None,
+        doc_string: str = None,
     ):
         if http_method not in self.SUPPORTED_METHODS:
             raise ValueError(f"Unsupported HTTP method: {http_method}")
@@ -88,6 +89,8 @@ class AutoDojoView:
         self.model_class_name = model_class._meta.object_name
         self.model_singular = model_class._meta.model_name.lower()
         self.model_plural = model_class._meta.verbose_name_plural.lower()
+
+        self.doc_string = doc_string
 
         try:
             self.generator_class = method_generation_classes[http_method](
@@ -123,3 +126,9 @@ class AutoDojoView:
         # view_funcs receiving request schemas will need to patch
         # their signature type annotations at runtime.
         self.view_func = self.generator_class.patch_view_signature(self.view_func)
+
+        # Update the view function's docstring, as this will be visible in
+        # any Ninja-generated OpenAPI documentation.
+        self.view_func = self.generator_class.patch_doc_string(
+            self.view_func, docstring=self.doc_string
+        )

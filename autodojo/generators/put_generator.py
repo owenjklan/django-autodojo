@@ -18,7 +18,6 @@ class AutoDojoPutGenerator(AutoDojoViewGenerator):
         def put_view_func(
             request: HttpRequest, id: int, payload: Schema, *args, **kwargs
         ):
-            # Look up the object being modified, if it exists
             try:
                 updated_object = self.model_class.objects.get(pk=id)
             except self.model_class.DoesNotExist:
