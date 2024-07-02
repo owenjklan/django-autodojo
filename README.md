@@ -1,6 +1,6 @@
 # What is AutoDojo?
 AutoDojo came about as a result of the [django_books_api](https://github.com/owenjklan/django-books-api)
-project which I started for myself as an educational/practice exercise.
+project which I started for myself as an educational / practice exercise.
 I very quickly became uninterested in repeating code for boilerplate
 CRUD operations on simple objects and as such, AutoDojo was born. This has
 also become a very educational exercise in Python type annotations and
@@ -22,8 +22,10 @@ will ultimately generate appropriate Ninja Schema objects for requests
 and responses as well as view functions for performing basic CRUD operations.
 
 ---
+
 Note that simple foreign key relations are handled but M2M relationships
 do not have any automatic generation implementation, as of July 2024.
+
 ---
 
 A simple example, pulled from `django_books_api` is as follows. The following
@@ -82,10 +84,7 @@ The model class can be specified as the Model class itself or a string.
 
 The `book_response_schema_configs` dictionary is an example of the user
 being able to pass overrides for values that will ultimately be used
-with Ninja's `create_schema()` function. The initial version of AutoDojo
-will apply these configuration parameters to ALL views generated, for all
-requested methods. There is no current way to provide method specific
-configuration parameters.
+with Ninja's `create_schema()` function.
 
 Note the special `"GETLIST"`: This is a special value for HTTP method
 names that the view generation will use to select a generator for listing
@@ -95,7 +94,7 @@ all of a specific object, rather than a single object.
 generated views already connected to it. Come time to add the generated
 router object to the `NinjaAPI` instance, the `add_router_args` property
 can be dereferenced to populate the mounting path and generated `Router`
-object, for convenience.
+object, for convenience with `NinjaAPI().add_router()`.
 
 The example code above also includes an example of using a "vanilla"
 view and router that was written manually, demonstrating that AutoDojo
@@ -104,7 +103,7 @@ can work alongside traditional approaches to connecting up views in Ninja.
 ### View Generation
 Each HTTP method verb will have an `AutoDojoViewGenerator` class associated
 with it. This base class is then subclassed to provide the view function
-implementation and default options for `create_schema` may be provided.
+implementation, and default options for `create_schema` may be provided.
 
 Although it hasn't been explicitly tested as of the time of writing (July, 2024),
 the `AutoDojoView` class should be usable directly with little modification.
@@ -120,7 +119,7 @@ to `create_schema()` is (higher numbers overwrite those of lower numbers):
 
 1. The defaults (optionally) defined in the view generator class's 
    `default_request_schema_config` or `default_response_schema_config`
-   class properties.
+   properties.
 2. Values provided by the `request_schema_config` and `response_schema_config`
    keyword arguments to the `AutoDojoView` constructor method
 
@@ -131,8 +130,6 @@ with using Sphinx for documentation generation. Watch this space.
 ## Wishlist of features
 - Ability to register additional "Special Methods" like "GETLIST", including
   a custom view generator class implementation
-- Ability to provide method-specific schema configuration overrides to
-  `AutoDojoRouter`
 - More thorough testing
 - Some form of registry object to allow generated schema classes to
   be queried at runtime by code external to AutoDojo
