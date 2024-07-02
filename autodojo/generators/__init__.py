@@ -1,0 +1,5 @@
+from .delete_generator import AutoDojoDeleteGenerator
+from .get_generator import AutoDojoGetGenerator, AutoDojoGetListGenerator
+from .patch_generator import AutoDojoPatchGenerator
+from .post_generator import AutoDojoPostGenerator
+from .put_generator import AutoDojoPutGenerator
