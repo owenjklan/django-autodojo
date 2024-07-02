@@ -20,6 +20,8 @@ For an example of how to use it, take a look at [django_books_api](https://githu
 The main class that kicks everything off is the `AutoDojoRouter`. This
 will ultimately generate appropriate Ninja Schema objects for requests
 and responses as well as view functions for performing basic CRUD operations.
+The generated view functions are automatically hooked into a Ninja Router
+instance that is ready to be hooked up to an existing NinjaAPI object.
 
 ---
 
@@ -53,7 +55,7 @@ authors_response_schema_configs = {
 books_adr = AutoDojoRouter(
     app_label="books_api",
     model="Book",
-    # auth_class=django_auth,  # AutoDojoRouter will create a NinjaAPI class using this, if present.
+    # auth_class=django_auth,  # AutoDojoRouter will create a Ninja Router class using this, if present.
     response_schema_configs=book_response_schema_configs,
 )
 authors_adr = AutoDojoRouter(
@@ -130,6 +132,7 @@ with using Sphinx for documentation generation. Watch this space.
 ## Wishlist of features
 - Ability to register additional "Special Methods" like "GETLIST", including
   a custom view generator class implementation
+- Out-of-the-box implementation for creating endpoints to manage M2M relations
 - More thorough testing
 - Some form of registry object to allow generated schema classes to
   be queried at runtime by code external to AutoDojo
